@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 1000px; margin: 50px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+
+    <h1 style="color: #cc0000; border-bottom: 2px solid #eee; padding-bottom: 15px;">{{ site.site_name }}</h1>
+    
+    <div class="site-details" style="margin-bottom: 30px; padding: 15px; background-color: #f4f4f4; border-left: 5px solid #004d99;">
+        <p><strong>Affected by:</strong> {{ site.associated_fire.title|default:"N/A" }} ({{ site.associated_fire.date|date:"Y"|default:"" }})</p>
+        <p><strong>Coordinates:</strong> Lat: {{ site.latitude }} / Lon: {{ site.longitude }}</p>
+        <p><strong>Area Description:</strong> {{ site.description }}</p>
+    </div>
+
+    {# ---------------------------------------------------------------- #}
+    {# FUTURE SPOT: User Comment/Feedback Form will go here (Segment B) #}
+    {# ---------------------------------------------------------------- #}
+    <div style="margin-top: 40px; border-top: 1px dashed #ccc; padding-top: 20px;">
+        <h3 style="color: #004d99;">User Regeneration Reports ({{ site_feedback|length }})</h3>
+
+        {% if site_feedback %}
+            {% for report in site_feedback %}
+            <div class="report-entry" style="border: 1px solid #e0e0e0; padding: 15px; margin-bottom: 15px; border-radius: 4px;">
+                <p style="font-weight: bold; margin-bottom: 5px;">
+                    Reported by: {{ report.user_name }} 
+                    <span style="float: right; color: green; font-size: 0.9em;">Status: {{ report.get_regeneration_status_display }}</span>
+                </p>
+                <p style="margin-top: 0; color: #555;">{{ report.comment }}</p>
+
+                {% if report.picture %}
+                    {# NOTE: This requires STATIC_URL and MEDIA_URL to be fully set up #}
+                    <img src="{{ report.picture.url }}" alt="Regeneration Photo" style="max-width: 100%; height: auto; border-radius: 3px; margin-top: 10px;">
+                {% endif %}
+                
+                <p style="font-size: 0.8em; color: #999; text-align: right;">Posted on: {{ report.date_posted|date:"F d, Y" }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Be the first to post a regeneration report for this area!</p>
+        {% endif %}
+    </div>
+
+    <!-- Comments Section -->
+         
+
+          <!-- Comment Form -->
+          <div class="mt-4">
+            <h4>Leave a Comment</h4>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                {{form.as_p}}
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Post Comment
+              </button>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+</div>
+{% endblock content %}

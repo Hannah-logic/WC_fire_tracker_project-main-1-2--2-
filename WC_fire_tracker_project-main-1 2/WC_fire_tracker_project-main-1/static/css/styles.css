@@ -1,0 +1,43 @@
+body { font-family: system-ui, sans-serif; margin: 20px; }
+header nav a { margin-right: 10px; }
+
+
+/* carousel.css */
+
+.carousel-item {
+  height: 300px; /* adjust height as needed */
+  position: relative;
+  background-color: #f8f9fa; /* optional background color */
+}
+
+/* Center all text perfectly in the middle */
+.carousel-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style text */
+.carousel-message {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.carousel-email a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.carousel-name {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Optional: dark mode for .carousel-dark */
+.carousel.carousel-dark .carousel-content {
+  color: #000;
+}

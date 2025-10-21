@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Send Feedback</h1>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form> <br>
+
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    {% for item in carousel %}
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{forloop.counter0}}" 
+        class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{forloop.counter0}}"></button>
+    {% endfor %}
+  </div>
+
+  <div class="carousel-inner">
+    {% for item in carousel %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
+        <div class="carousel-content">
+          <p class="carousel-message">{{ item.message }}</p>
+          <h5 class="carousel-email">
+            <a href="#">{{ item.email }}</a>
+          </h5>
+          <p class="carousel-name">{{ item.name }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<br>
+
+
+
+
+
+
+
+{% endblock content %}
+
+
