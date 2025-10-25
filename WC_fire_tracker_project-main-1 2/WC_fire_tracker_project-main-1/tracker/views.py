@@ -8,7 +8,7 @@ def incident_list(request):
     sites = RegenerationSite.objects.select_related('associated_fire').order_by('-date_established')
     
     context = {
-        'sites': sites, # 💥 CHANGE 2: Change variable name to 'sites' to match the template loop
+        'sites': sites, 
         'page_title': 'Tracked Regeneration Sites',
     }
     return render(request, 'tracker/list.html', context) 
